@@ -9,7 +9,15 @@ downloads:
           x86_64: x86_64
           arm_64: arm64
         url: https://github.com/matthewbaggett/packaged-tooling/releases/download/${version}/php-8.2-${os}-${cpu}
-runtimes:
+tools:
+  definitions:
+    - name: php
+      download: php-8.2
+      known_good_version: 0.0.1
+      shims:
+        - name: php
+          target: php-8.2
+# runtimes:
 #  definitions:
 #    - type: python
 #      download: php-8.2

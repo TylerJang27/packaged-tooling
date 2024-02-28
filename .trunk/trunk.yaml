@@ -9,6 +9,8 @@ plugins:
     - id: trunk
       ref: v1.4.3
       uri: https://github.com/trunk-io/plugins
+    - id: custom
+      local: .
 # Many linters and tools depend on runtimes - configure them here. (https://docs.trunk.io/runtimes)
 runtimes:
   enabled:
@@ -17,6 +19,7 @@ runtimes:
 # This is the section where you manage your linters. (https://docs.trunk.io/check/configuration)
 lint:
   enabled:
+    - php-cs-fixer@0.0.1
     - actionlint@1.6.26
     - checkov@3.2.21
     - git-diff-check
@@ -38,3 +41,4 @@ tools:
   enabled:
     - act@0.2.59
     - action-validator@0.5.4
+    - php@0.0.1

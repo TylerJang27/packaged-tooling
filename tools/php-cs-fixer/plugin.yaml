@@ -18,5 +18,28 @@ tools:
         - name: PATH
           list: ["${tool}/bin"]
       shims:
-       - name: php-cs-fixer
-         target: php-cs-fixer
+        - name: php-cs-fixer
+          target: php-cs-fixer
+lint:
+  definitions:
+    - name: php-cs-fixer
+      files: [php]
+      main_tool: php-cs-fixer
+      # tools: [php]
+      known_good_version: 0.0.1
+      commands:
+        - name: lint
+          run: php-cs-fixer check --format=json --verbose --using-cache=no --show-progress=none -n ${target}
+          output: sarif
+          cache_results: true
+          success_codes: [0, 4, 8]
+          parser:
+            runtime: python
+            run: python3 ${cwd}/parser.py
+        - name: format
+          run: php-cs-fixer fix --using-cache=no --show-progress=none -n ${target}
+          output: rewrite
+          in_place: true
+          cache_results: true
+          success_codes: [0]
+      direct_configs: [.php_cs.dist]
